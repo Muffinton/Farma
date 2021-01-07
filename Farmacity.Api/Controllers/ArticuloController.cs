@@ -21,6 +21,15 @@ namespace Farmacity.Api.Controllers
             return Ok(articulos);
         }
 
+        [Route("obtenerPorFiltro")]
+        [HttpGet]
+        public IHttpActionResult ObtenerListadoPorFiltro(string articulo)
+        {
+            if (!ModelState.IsValid) return CreateHttpErrorMessage(GetModelErrors());
+            var articulos = _articuloRepository.ObtenerPorFiltro(articulo);
+            return Ok(articulos);
+        }
+
         [HttpPost]
         public IHttpActionResult AgregarArticulo(Articulo articulo)
         {
@@ -30,7 +39,7 @@ namespace Farmacity.Api.Controllers
 
         }
 
-        [HttpPatch]
+        [HttpPut]
         public IHttpActionResult EditarArticulo(Articulo articulo)
         {
             if (!ModelState.IsValid) return CreateHttpErrorMessage(GetModelErrors());

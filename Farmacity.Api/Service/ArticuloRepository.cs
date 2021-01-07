@@ -14,6 +14,15 @@ namespace Farmacity.Api.Service
             }
         }
 
+        public List<Articulo> ObtenerPorFiltro(string articulo)
+        {
+            using (var db = new Context())
+            {
+                var resultado = db.Articulos.ToList();
+                return resultado.Where(a => a.Descripcion.ToLower().Contains(articulo.ToLower())).ToList();
+            }
+        }
+
         public void AgregarArticulo(Articulo articulo)
         {
             using (var db = new Context())
